@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
+//import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 interface IERC20 {
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
@@ -8,12 +9,14 @@ interface IERC20 {
 }
 
 contract TokenLending {
+    //IERC20 public tokenAddress;
+
     mapping(address => uint256) public balances;
     mapping(address => uint256) public borrowedAmounts;
     address public tokenAddress;
 
     constructor(address _tokenAddress) {
-        tokenAddress = _tokenAddress;
+        tokenAddress = IERC20(_tokenAddress);
     }
 
     function deposit(uint256 amount) external {
